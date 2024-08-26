@@ -1,0 +1,26 @@
+void run_tests(int num_tests, int array_sizes[]) {
+    for (int i = 0; i < num_tests; i++) {
+        int size = array_sizes[i];
+        Image* data = malloc(size * sizeof(Image));
+
+        // Teste com dados aleatórios
+        generate_random_data(data, size);
+        test_algorithm(quicksort, data, size, "Quicksort", "Aleatório");
+        test_algorithm(heapsort, data, size, "Heapsort", "Aleatório");
+        test_algorithm(mergesort, data, size, "Mergesort", "Aleatório");
+
+        // Teste com dados ordenados
+        qsort(data, size, sizeof(Image), compare_images);
+        test_algorithm(quicksort, data, size, "Quicksort", "Ordenado");
+        test_algorithm(heapsort, data, size, "Heapsort", "Ordenado");
+        test_algorithm(mergesort, data, size, "Mergesort", "Ordenado");
+
+        // Teste com dados inversamente ordenados
+        reverse_array(data, size);
+        test_algorithm(quicksort, data, size, "Quicksort", "Inversamente Ordenado");
+        test_algorithm(heapsort, data, size, "Heapsort", "Inversamente Ordenado");
+        test_algorithm(mergesort, data, size, "Mergesort", "Inversamente Ordenado");
+
+        free(data);
+    }
+}
